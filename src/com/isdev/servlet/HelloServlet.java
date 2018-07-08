@@ -6,6 +6,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Enumeration;
@@ -17,9 +18,28 @@ public class HelloServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        doPost(req, resp);
+        doPost(req, resp);
 //        String params = req.getQueryString();
 //        System.out.println("get params = " + params);
+        //get 请求也不需要需改encoding为utf-8也没有乱码问题（奇怪）
+        /*resp.setContentType("text/html;charset=UTF-8");
+        Enumeration<String> parameterNames = req.getParameterNames();
+        while(parameterNames.hasMoreElements()) {
+            String name = parameterNames.nextElement();
+            if(name.equals("hobby")) {
+                System.out.print("爱好：");
+                String[] hobbys = req.getParameterValues(name);
+                for (String hobby:hobbys) {
+                    System.out.print(hobby + ":");
+                }
+                System.out.println();
+            } else {
+                System.out.println(name + ":" + req.getParameter(name));
+            }
+        }*/
+//        ServletOutputStream outputStream = resp.getOutputStream();
+//        outputStream.println("qwert");
+//        resp.getWriter().println("GET请求成功");
 //
 
     }
@@ -29,6 +49,37 @@ public class HelloServlet extends HttpServlet {
 //        requestLine(req);
 //        requestHeaders(req, resp);
 //        requestData(req);
+//        reqParas(req, resp);
+//        redirect(resp);
+//        refresh(resp);
+//        getImage(resp);
+    }
+
+    private void getImage(HttpServletResponse resp) throws IOException {
+        resp.setContentType("image/jpg");
+        // D:\workspace\WebTest\web\image\img.jpg
+        FileInputStream input = new FileInputStream("D:\\workspace\\WebTest\\web\\image\\img.jpg");
+        int len = 0;
+        byte[] buf = new byte[1024];
+        while ((len = input.read(buf)) != -1){
+            resp.getOutputStream().write(buf, 0, len);
+        }
+    }
+
+    private void refresh(HttpServletResponse resp) throws IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+        resp.getWriter().write("3秒之后跳转test.jsp");
+        resp.setHeader("refresh", "3;url=/http/test.jsp");
+    }
+
+    private void redirect(HttpServletResponse resp) {
+        //重定向
+        resp.setStatus(302);
+        resp.setHeader("location", "/http/test.html");
+//        resp.sendRedirect("/http/test.jsp");
+    }
+
+    private void reqParas(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         /**
          * 设值参数的查询码表
          * 该方法支队请求实体内容起作用（即POST请求的参数）
@@ -41,7 +92,7 @@ public class HelloServlet extends HttpServlet {
          * 或者：String name = new String(name.getBytes("iso-8859-1"),"utf-8");
          */
         req.setCharacterEncoding("UTF-8");
-//        resp.setContentType("text/html;charset=UTF-8");
+        resp.setContentType("text/html;charset=UTF-8");
         Enumeration<String> parameterNames = req.getParameterNames();
         while(parameterNames.hasMoreElements()) {
             String name = parameterNames.nextElement();
@@ -56,10 +107,11 @@ public class HelloServlet extends HttpServlet {
                 System.out.println(name + ":" + req.getParameter(name));
             }
         }
-        ServletOutputStream outputStream = resp.getOutputStream();
-        outputStream.println("qwert");
+//        ServletOutputStream outputStream = resp.getOutputStream();
+//        outputStream.println("qwert");
 //        resp.getWriter().println("请求成功");
-
+        resp.setStatus(404);
+        resp.sendError(404);
     }
 
     //请求参数，不知道为啥不能用
