@@ -40,7 +40,6 @@ public class HelloServlet extends HttpServlet {
 //        ServletOutputStream outputStream = resp.getOutputStream();
 //        outputStream.println("qwert");
 //        resp.getWriter().println("GET请求成功");
-//
 
     }
 
@@ -52,7 +51,7 @@ public class HelloServlet extends HttpServlet {
 //        reqParas(req, resp);
 //        redirect(resp);
 //        refresh(resp);
-//        getImage(resp);
+        getImage(resp);
     }
 
     private void getImage(HttpServletResponse resp) throws IOException {

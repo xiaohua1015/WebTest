@@ -12,4 +12,27 @@
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CycleLifeServlet</servlet-name>
+        <servlet-class>com.isdev.servlet.CycleLifeServlet</servlet-class>
+        <!--<load-on-startup>1</load-on-startup>-->
+        <init-param>
+            <param-name>path</param-name>
+            <param-value>D:\workspace\WebTest\web\file\b.txt</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CycleLifeServlet</servlet-name>
+        <url-pattern>/cycleLifeServlet</url-pattern>
+    </servlet-mapping>
+
+    <context-param>
+        <param-name>contextParam</param-name>
+        <param-value>刘先森</param-value>
+    </context-param>
+    
+    <welcome-file-list>
+        <welcome-file>hello</welcome-file>
+    </welcome-file-list>
 </web-app>
