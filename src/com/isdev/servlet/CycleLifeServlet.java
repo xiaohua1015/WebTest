@@ -44,7 +44,7 @@ public class CycleLifeServlet extends HttpServlet {
         System.out.println("contextPath = " + contextPath);
         String param = servletContext.getInitParameter("contextParam");
         System.out.println("param = " + param);
-        this.getServletContext().getRequestDispatcher()
+        this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     private void servletConfig(HttpServletResponse response) throws IOException {

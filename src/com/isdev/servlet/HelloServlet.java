@@ -6,6 +6,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Date;
@@ -51,7 +52,14 @@ public class HelloServlet extends HttpServlet {
 //        reqParas(req, resp);
 //        redirect(resp);
 //        refresh(resp);
+        test(req);
         getImage(resp);
+    }
+
+    private void test(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String name = (String) session.getAttribute("name");
+        System.out.println("name = " + name);
     }
 
     private void getImage(HttpServletResponse resp) throws IOException {

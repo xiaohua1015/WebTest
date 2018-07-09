@@ -4,6 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <session-config>
+        <!--1分钟之后session失效-->
+        <session-timeout>1</session-timeout>
+    </session-config>
+
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>com.isdev.servlet.HelloServlet</servlet-class>
@@ -26,6 +31,16 @@
         <servlet-name>CycleLifeServlet</servlet-name>
         <url-pattern>/cycleLifeServlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CookieServlet</servlet-name>
+        <servlet-class>com.isdev.servlet.CookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CookieServlet</servlet-name>
+        <url-pattern>/cookie</url-pattern>
+    </servlet-mapping>
+
 
     <context-param>
         <param-name>contextParam</param-name>
